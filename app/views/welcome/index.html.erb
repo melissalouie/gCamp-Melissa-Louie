@@ -46,7 +46,7 @@
     </div>
 
     <% @quotes.each_slice(2) do |quote, author| %>
-      <p><%= quote %></p>
-      <p class = "text-muted"><em><%= author %></em></p>
+      <p>"<%= quote %>" </p>
+      <p class ="text-muted"><em><%= author %></em></p>
     <% end %>
-</div>
+  </div>
