@@ -8,14 +8,25 @@
     <li><a href="#how-do-i-join">How do I join gCamp?</a></li>
     <li><a href="#when-will-gcamp-be-finished">When will gCamp be finished?</a></li>
   </ul>
-  <% @faqs.each_slice(3) do |anchor, question, answer| %>
     <div class="row">
       <div class="col-md-6">
-      <a name="<%= anchor %>"> </a>
-        <h3 class="question"><%= question %></h3>
-          <p class="answer"><%= answer %></p>
-            <a href="#top">Top</a>
+        <a name="#<%= @one.slug %>"></a>
+        <h3><%= @one.question %></h3>
+        <p><%= @one.answer %></p>
       </div>
     </div>
-  <% end %>
-</div>
+    <div class="row">
+      <div class="col-md-6">
+        <a name="#<%= @two.slug %>"></a>
+        <h3><%= @two.question %></h3>
+        <p><%= @two.answer %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <a name="#<%= @three.slug %>"></a>
+        <h3><%= @three.question %></h3>
+        <p><%= @three.answer %></p>
+      </div>
+    </div>
+  </div>
