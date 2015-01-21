@@ -23,37 +23,27 @@
       <%= yield %>
 
 
-    <div class="container">
-      <footer>
-        <div class="row">
-          <div class="col-md-6">
-            <%= link_to "About", about_path %>
-            |
-            <%= link_to "Terms", terms_path %>
-            |
-            <%= link_to "FAQ", faq_path %>
-            |
-            <%= link_to "Tasks", tasks_path %>
-          </div>
-          <div class="col-md-6 text-right">
-            <a href="https://www.linkedin.com/profile/edit?trk=spm_pic">
-              <%= image_tag("linked_in.jpg", class: "img-footer") %>
-            </a>
-            <a href="https://github.com/melissalouie">
-              <%= image_tag("github.png", class: "img-footer") %>
-            </a>
-            <a href="https://twitter.com/missylaneuz">
-              <%= image_tag("Twitter.png", class: "img-footer") %>
-            </a>
-            <a href="https://students.gschool.it/students/223">
-              <%= image_tag("galvanize.png", class: "img-footer") %>
-            </a>
-          </div>
-        </div>
-
-      </footer>
+<div class="container">
+  <footer>
+    <div class="row">
+      <div class="col-md-6">
+        <%= link_to "About", about_path %>
+        |
+        <%= link_to "Terms", terms_path %>
+        |
+        <%= link_to "FAQ", faq_path %>
+        |
+        <%= link_to "Tasks", tasks_path %>
+      </div>
+      <div class="col-md-6 text-right">
+          <%= link_to image_tag("linked_in.jpg", :class=>"img-footer"), "https://www.linkedin.com/profile/edit?trk=spm_pic" %>
+          <%= link_to image_tag("github.png", :class=>"img-footer"), "https://github.com/melissalouie" %>
+          <%= link_to image_tag("Twitter.png", :class=>"img-footer"), "https://twitter.com/missylaneuz" %>
+          <%= link_to image_tag("galvanize.png", :class=>"img-footer"), "https://students.gschool.it/students/223" %>
+      </div>
     </div>
-    </div> <!-- /container -->
+  </footer>
+</div> <!-- /container -->
 
 
     <!-- Bootstrap core JavaScript
