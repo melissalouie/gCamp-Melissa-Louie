@@ -3,30 +3,18 @@
     <a name="top"></a>
     <h1>Frequently Asked Questions</h1>
   </div>
-  <ul>
-    <li><a href="#what-is-gcamp">What is gCamp?</a></li>
-    <li><a href="#how-do-i-join">How do I join gCamp?</a></li>
-    <li><a href="#when-will-gcamp-be-finished">When will gCamp be finished?</a></li>
-  </ul>
-    <div class="row">
-      <div class="col-md-6">
-        <a name="#<%= @one.slug %>"></a>
-        <h3><%= @one.question %></h3>
-        <p><%= @one.answer %></p>
+    <ul>
+      <li><a href="#what-is-gcamp">What is gCamp?</a></li>
+      <li><a href="#how-do-i-join">How do I join gCamp?</a></li>
+      <li><a href="#when-will-gcamp-be-finished">When will gCamp be finished?</a></li>
+    </ul>
+      <div class="row">
+        <div class="col-md-6">
+          <% @faqs.each do |faq| %>
+          <a name="<%= faq.slug %>"></a>
+          <h3><%= faq.question %></h3>
+          <p><%= faq.answer %></p>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <a name="#<%= @two.slug %>"></a>
-        <h3><%= @two.question %></h3>
-        <p><%= @two.answer %></p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <a name="#<%= @three.slug %>"></a>
-        <h3><%= @three.question %></h3>
-        <p><%= @three.answer %></p>
-      </div>
-    </div>
-  </div>
+</div>
