@@ -1,6 +1,11 @@
 <div class="container">
-  <h1>New Task</h1>
-
+  <div class="page-header">
+    <h1>New Task</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><a href="/tasks">Tasks</a></li>
+    <li>New Task</li>
+  </ol>
   <%= render 'form' %>
 
   <%= link_to 'Back', tasks_path %>
