@@ -29,7 +29,11 @@
           <label>Completed?</label>
         </div>
         <div class="control-label col-md-4">
-         <%= f.check_box :completed, { :checked => 'true'} %>
+          <% if @task.completed == true %>
+         <%= f.check_box :completed, { :checked => 'checked'} %>
+         <% else %>
+         <%= f.check_box :completed, { :checked => 'true' } %>
+         <% end %>
         </div>
       <% end %>
     </div>
