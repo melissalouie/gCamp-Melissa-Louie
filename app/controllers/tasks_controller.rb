@@ -1,6 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  def incomplete
+    @tasks = Task.all
+  end
   # GET /tasks
   # GET /tasks.json
   def index
