@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="form-group row">
-    <%= f.label :description, :class => "control-label col-md-2" %>
+    <%= f.label :description, class: "control-label col-md-2" %>
     <div class="form-controls col-md-4">
       <%= f.text_field :description, :class => 'form-control', :id => "task_description" %>
-      </div>
+    </div>
   </div>
 
   <div class="form-group row">
-    <%= f.label :due_date, :class => "control-label col-md-2" %>
+    <%= f.label :due_date, class: "control-label col-md-2" %>
     <div class="form-controls col-md-4">
-      <%= f.date_field :due_date, :class => 'form-control', :id => 'due_date' %></div>
+      <%= f.date_field :due_date, class:'form-control', id: 'due_date' %></div>
     </div>
     <div class="form-group row">
       <% unless @task.new_record? %>
@@ -38,8 +38,9 @@
       <% end %>
     </div>
   <div class="form-group row">
-    <div class="col-md-offset-2 col-md-4"><%= f.submit :class => "btn btn-primary" %>
-    <%= link_to 'Cancel', tasks_path, class: 'btn btn-default' %>
-  </div>
+    <div class="col-md-offset-2 col-md-4">
+      <%= f.submit class: "btn btn-info" %>
+      <%= link_to 'Cancel', tasks_path, class: 'btn btn-default' %>
+    </div>
   </div>
 <% end %>
