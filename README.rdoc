@@ -1,26 +1,13 @@
-== README
+# Melissa's gCamp
+ruby version '2.2.0'
 
-Melissa's gCamp Project
+[View on Heroku](http://fathomless-fortress-7983.herokuapp.com)
 
-* Ruby version
-2.2.0
+To Install:
 
-* System dependencies
+```
+bundle
+rake db:create db:migrate db:seed
+rails s
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+```

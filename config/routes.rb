@@ -15,7 +15,8 @@ Rails.application.routes.draw do
   get 'faq' => 'pages#faq'
   get 'tasks' => 'pages#terms'
   get 'incomplete' => 'tasks#incomplete'
-  
+  get 'signup' => 'pages#signup'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
