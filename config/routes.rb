@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  get 'logins/new'
+
+  get 'sessions/new'
+
   resources :tasks
   resources :users
+  resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -15,7 +20,10 @@ Rails.application.routes.draw do
   get 'faq' => 'pages#faq'
   get 'tasks' => 'pages#terms'
   get 'incomplete' => 'tasks#incomplete'
-  get 'signup' => 'pages#signup'
+  get 'sign_out' => 'sessions#destroy', :as => 'sign_out'
+  get 'sign_in' => 'sessions#new', :as => 'sign_in'
+  get 'sign_up' => 'pages#sign_up'
+
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

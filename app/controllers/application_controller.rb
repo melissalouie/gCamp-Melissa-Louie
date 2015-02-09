@@ -5,6 +5,19 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  config.filter_parameters :password
+
+  before_filter :check_token
+
+  protected
+
+  def check_token
+    unless session[:token]
+      session[:original_url] = request.url
+  
+    end
+  end
+
   private
 
   def current_user

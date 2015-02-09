@@ -37,8 +37,13 @@ footer {
 
 }
 
+#due_date {
+  margin-top: 0;
+}
+
 .alert {
   margin-top: 20px;
+  text-align: center;
 }
 
 th {
@@ -47,4 +52,21 @@ th {
 
 dd, dt {
   padding: 10px;
+}
+
+#sign_up {
+  margin-top: 50px;
+}
+
+.form-group {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#password_confirmation {
+  margin-top: 0;
+}
+
+.well h1 {
+  text-align:center;
 }

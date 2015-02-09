@@ -30,15 +30,28 @@
     </div>
   </div>
   <div class="form-group row">
+    <%= f.label :password, class: "control-label col-md-2" %>
+    <div class="form-controls col-md-4">
+      <%= f.password_field :password, class: "form-control", id: "password" %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <%= f.label :password_confirmation, class: "control-label col-md-2", id: "password_confirmation" %>
+    <div class="form-controls col-md-4">
+      <%= f.password_field :password_confirmation, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group row">
     <div class="col-md-offset-2 col-md-4">
       <%= f.submit class: "btn btn-info" %>
       <%= link_to 'Cancel', users_path, class: 'btn btn-default' %>
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-md-offset-2 col-md-4 well">
-      <center><%= link_to 'Delete User', user_path(@user), method: 'delete', class: 'btn btn-danger' %></center>
-
+    <div class="col-md-offset-2 col-md-4">
+      <% unless @user.new_record? %>
+      <center class="well"><%= link_to 'Delete User', user_path(@user), method: :delete, class: 'btn btn-danger' %></center>
+      <% end %>
     </div>
   </div>
 <% end %>
