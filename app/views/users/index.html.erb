@@ -17,7 +17,9 @@
           <tr>
             <td class="col-md-2"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
             <td colspan="3"><%= mail_to user.email %></td>
-            <td><%= link_to 'Edit', edit_user_path(user), class: "pull-right" %></td>
+            <td class="text-right"><%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
+              <%= link_to 'Delete', user_path(user), method: :delete, class: "btn btn-danger" %>
+            </td>
           </tr>
         <% end %>
       </tbody>

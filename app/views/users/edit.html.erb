@@ -4,7 +4,7 @@
   </div>
   <ol class="breadcrumb">
     <li><%= link_to 'Users', users_path %></li>
-    <li class="text-muted"><%= @user.first_name %>&nbsp;<%= @user.last_name %></li>
+    <li class="text-muted"><%= link_to "#{@user.first_name} #{@user.last_name}", user_path(@user) %></li>
   </ol>
   <%= render 'form' %>
 </div>
