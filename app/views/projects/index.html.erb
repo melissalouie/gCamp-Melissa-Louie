@@ -11,9 +11,11 @@
       </thead>
       <tbody>
         <% @projects.each do |project| %>
-        <tr>
-          <td><%= link_to project.name, project_path(project) %></td>
-        </tr>
+          <tr>
+            <td><%= link_to project.name, project_path(project) %></td>
+            <td class="text-right"><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-info' %>
+                                   <%= link_to 'Delete', project_path(project), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?' } %></td>
+          </tr>
         <% end %>
       </tbody>
   </table>
