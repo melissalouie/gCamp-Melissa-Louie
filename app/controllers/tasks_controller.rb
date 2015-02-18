@@ -2,17 +2,30 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def incomplete
-    @tasks = Task.all
+    if current_user
+      @tasks = Task.all
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if current_user
+      @tasks = Task.all
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    if current_user
+      @task = Task.find(params[:id])
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   # GET /tasks/new
@@ -22,6 +35,11 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    if current_user
+      @task = Task.find(params[:id])
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   # POST /tasks

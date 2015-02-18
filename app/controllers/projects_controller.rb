@@ -2,11 +2,19 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
-    @projects = Project.all
+    if current_user
+      @projects = Project.all
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   def new
-    @project = Project.new
+    if current_user
+      @project = Project.new
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   def create
@@ -20,6 +28,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    if current_user
+      @project = Project.find(params[:id])
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   def update
@@ -32,6 +45,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    if current_user
+      @project = Project.find(params[:id])
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   def destroy
