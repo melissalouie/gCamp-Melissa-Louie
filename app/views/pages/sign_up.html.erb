@@ -1,8 +1,7 @@
 <div class="container">
   <div class="well col-md-6 col-md-offset-3" id="sign_up">
-    <div class="page-header">
-      <h1>Sign Up for gCamp</h1>
-    </div>
+    <h1>Sign Up for gCamp</h1>
+
     <%= form_for(@user) do |f| %>
     <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -51,5 +50,6 @@
         <%= f.submit 'Sign Up', class: 'btn btn-info' %>
       </div>
     <% end %>
+    </div>
   </div>
 </div>
