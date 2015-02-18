@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   get 'faq' => 'pages#faq'
   get 'tasks' => 'pages#terms'
   get 'incomplete' => 'tasks#incomplete'
-  get 'sign_out' => 'sessions#destroy', :as => 'sign_out'
-  get 'sign_in' => 'sessions#new', :as => 'sign_in'
-  get 'sign_up' => 'pages#sign_up'
+  get 'signout' => 'sessions#destroy', :as => 'signout'
+  get 'signin' => 'sessions#new', :as => 'signin'
+  post 'signin' => 'sessions#create'
+  get 'signup' => 'pages#sign_up'
 
 
   # Example of named route that can be invoked with purchase_url(id: product.id)

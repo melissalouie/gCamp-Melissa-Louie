@@ -16,8 +16,8 @@
             <% if current_user %>
               <li><%= current_user.first_name %>&nbsp;<%= current_user.last_name %></li>
             <% else %>
-              <li><%= link_to 'Sign Up', sign_up_path %></li>
-              <li><%= link_to 'Sign In', sign_in_path %></li>
+              <li><%= link_to 'Sign Up', signup_path %></li>
+              <li><%= link_to 'Sign In', signin_path %></li>
             <% end %>
           </ul>
 
@@ -25,8 +25,11 @@
       </div>
     </div>
   </nav>
+  <% if alert %>
+    <div class="alert alert-danger"><%= alert %></div>
+  <% end %>
   <% if notice %>
-  <div class="alert alert-success" id="notice"><%= notice %></div>
+    <div class="alert alert-success" id="notice"><%= notice %></div>
   <% end %>
 
 <%= yield %>
