@@ -1,6 +1,7 @@
 <div class="container">
   <div class="page-header">
-    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-info pull-right" %>
+    <%= link_to 'Delete', user_path(@user), method: :delete, class: "btn btn-danger pull-right" %>
+    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-info pull-right", id: "edit-button" %>
     <h1><%= @user.first_name %>&nbsp;<%= @user.last_name %></h1>
   </div>
     <ol class="breadcrumb">
