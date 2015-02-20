@@ -26,7 +26,7 @@ describe 'User can CRUD Users' do
 
   scenario 'User can delete a user' do
     click_on 'Delete'
-    page.should have_no_content('Missy Louie')
+    expect(page).to have_no_content('Missy Louie')
 
   end
 
