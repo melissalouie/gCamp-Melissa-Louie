@@ -29,9 +29,7 @@ gem 'pg'
 gem "bcrypt-ruby", :require => "bcrypt"
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-# Capybara
-gem 'rspec-rails'
-gem 'capybara'
+
 
 
 # Use Unicorn as the app server
@@ -50,6 +48,8 @@ group :development, :test do
   # gem 'pry-rails'
   # gem 'pry-byebug'
 
+  gem 'rspec-rails'
+  gem 'capybara'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
