@@ -1,4 +1,11 @@
+
+default: &default
+ adapter: postgresql
+
+development:
+ <<: *default
+ database: gcamp_development
+
 test:
-  adapter: postgresql
-  database: travis_ci_test
-  username: postgres
+ <<: *default
+ database: gcamp_test

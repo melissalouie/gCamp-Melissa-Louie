@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   get 'sessions/new'
 
-  resources :projects
-  resources :tasks
+  resources :projects do
+    resources :tasks
+  end
   resources :users
   resources :sessions
 
