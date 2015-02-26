@@ -3,8 +3,7 @@
       <h1>Edit Task</h1>
     </div>
   <ol class="breadcrumb">
-    <li><%= link_to 'Tasks', tasks_path %></li>
-    <li><%= link_to @task.description, @task %></li>
+    <li><%= link_to 'Tasks', project_tasks_path(@project) %></li>
     <li><%= @task.description %></li>
   </ol>
   <%= render 'form' %>
