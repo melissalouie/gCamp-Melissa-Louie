@@ -8,18 +8,18 @@ describe 'Users can CRUD tasks' do
     fill_in 'password', with: 'password'
     within('form') do
       click_on 'Sign In'
+    @task = Task.create(description: "First Task", due_date: '2015-03-20', project_id: 1)
+    @project = Project.create(name: 'First Project')
     end
   end
 
   scenario 'User can create Task' do
-    Task.create(description: "First Task", due_date: '2015-03-20')
-    visit '/tasks'
+    visit project_task_path(@project, @task)
     expect(page).to have_content('First Task')
   end
 
   scenario 'User can edit Task' do
-    task = Task.create(description: "First Task", due_date: '2015-03-20')
-    visit "/tasks/#{task.id}"
+    visit project_task_path(@project, @task)
     click_on 'Edit'
     fill_in 'task[description]', with: 'Second Task'
     click_on 'Update Task'
@@ -27,8 +27,7 @@ describe 'Users can CRUD tasks' do
   end
 
   scenario 'User can delete Task' do
-    task = Task.create(description: "First Task", due_date: '2015-03-20')
-    visit "/tasks/#{task.id}"
+    visit project_task_path(@project, @task)
     click_on 'Delete'
     expect(page).to have_no_content('First Task')
   end
