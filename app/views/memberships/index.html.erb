@@ -12,7 +12,7 @@
   </div>
   <% @project.memberships.each do |member| %>
   <div class="form-inline">
-    <%= member.user.full_name %>
+    <%= link_to member.user.full_name, user_path(member.user) %>
     <%= render partial: 'updateform', locals: {member: member} %>
     <%= link_to '', project_membership_path(@project, member), method: :delete, class: 'glyphicon glyphicon-remove' %>
   </div>
