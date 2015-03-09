@@ -54,8 +54,11 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-
-    if @user == User.find_by(id: current_user.id)
+    if current_user == nil
+        @user.destroy
+        redirect_to users_path
+        flash[:notice] = "User was successfully deleted."
+    elsif @user == User.find_by(id: current_user.id)
       redirect_to users_path, alert: "Cannot delete user when signed in."
     else
       @user.destroy

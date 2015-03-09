@@ -25,20 +25,6 @@ describe 'User can CRUD Users' do
   end
 
   scenario 'User can delete a user' do
-    visit '/'
-    click_on "Users"
-    click_on "New User"
-    User.destroy_all
-    user = User.create(first_name: 'Melissa', last_name: 'Louie', email: 'melissa@mail.com', password: 'password', password_confirmation: 'password', id: 1)
-    fill_in 'user[first_name]', with: 'Melissa'
-    fill_in 'user[last_name]', with: 'Louie'
-    fill_in 'user[email]', with: 'melissa@mail.com'
-    fill_in 'user[password]', with: 'password'
-    fill_in 'user[password_confirmation]', with: 'password'
-    click_on 'Create User'
-    visit user_path(user)
-
-
     click_on 'Delete'
     expect(page).to have_no_content('Melissa Louie')
 
