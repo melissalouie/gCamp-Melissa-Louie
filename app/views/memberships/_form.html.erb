@@ -1,0 +1,7 @@
+<%= form_for [@project, @membership] do |f| %>
+  <div class="form-inline">
+    <%= f.collection_select :user_id, User.all, :id, :full_name, {include_blank: 'Select a User'}, {class: 'form-control'} %>
+    <%= f.select :role, [['Member', true], ['Owner', false]], {},  {class: 'form-control'} %>
+    <%= f.submit 'Add New Member', class: 'btn btn-primary'%>
+  </div>
+<% end %>

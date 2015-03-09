@@ -1,0 +1,4 @@
+<%= form_for [@project, member] do |f| %>
+<%= f.select :role, [['Member', true], ['Owner', false]], {},  {class: 'form-control'} %>
+<%= f.submit 'Update', class: 'btn btn-primary' %>
+<% end %>

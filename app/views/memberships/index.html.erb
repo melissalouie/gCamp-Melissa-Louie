@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="page-header">
+    <h1><%= @project.name %>: Manage Members</h1>
+  </div>
+  <ol class="breadcrumb">
+    <li><%= link_to 'Project', projects_path %></li>
+    <li><%= link_to @project.name, project_path(@project) %></li>
+    <li>Memberships</li>
+  </ol>
+  <div class=well>
+    <%= render 'form' %>
+  </div>
+  <% @project.memberships.each do |member| %>
+  <div class="form-inline">
+    <%= member.user.full_name %>
+    <%= render partial: 'updateform', locals: {member: member} %>
+    <%= link_to '', project_membership_path(@project, member), method: :delete, class: 'glyphicon glyphicon-remove' %>
+  </div>
+
+  <% end %>
+</div>
