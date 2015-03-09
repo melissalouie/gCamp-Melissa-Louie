@@ -1,7 +1,10 @@
 <%= form_for [@project, @membership] do |f| %>
+<%= render partial: 'shared/errors', locals: {object: @membership} %>
+<div class="well">
   <div class="form-inline">
     <%= f.collection_select :user_id, User.all, :id, :full_name, {include_blank: 'Select a User'}, {class: 'form-control'} %>
     <%= f.select :role, [['Member', true], ['Owner', false]], {},  {class: 'form-control'} %>
     <%= f.submit 'Add New Member', class: 'btn btn-primary'%>
   </div>
+</div>
 <% end %>
