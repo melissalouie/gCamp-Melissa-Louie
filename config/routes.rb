@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :projects do
     resources :tasks
+    resources :members 
   end
   resources :users
   resources :sessions
