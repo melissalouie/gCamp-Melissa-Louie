@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if current_user
+      @users = User.all
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   # GET /users/1
@@ -14,7 +18,11 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    if current_user
+      @user = User.new
+    else
+      redirect_to root_path, notice: "You must be logged in to view this page."
+    end
   end
 
   # GET /users/1/edit

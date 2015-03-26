@@ -1,5 +1,5 @@
 # Melissa's gCamp
-ruby version '2.2.0'
+Ruby Version '2.2.0'
 
 [View on Heroku](http://fathomless-fortress-7983.herokuapp.com)
 
