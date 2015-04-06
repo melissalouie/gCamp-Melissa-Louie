@@ -2,7 +2,7 @@
   <div class="page-header">
       <%= link_to 'Delete', project_task_path(@project, @task), method: :delete, class: 'btn btn-danger pull-right' %>
       <%= link_to 'Edit', edit_project_task_path(@project, @task), class: 'btn btn-info pull-right', id: 'edit-button' %>
-    <h1><%= @task.description %> |  Due Date: <%= @task.due_date %></h1>
+    <h1><%= @task.description %></h1>
   </div>
     <ol class="breadcrumb">
       <li><%= link_to 'Projects', projects_path %></li>
@@ -10,4 +10,6 @@
       <li><%= link_to 'Tasks', project_tasks_path(@project) %></li>
       <li class="active"><%= @task.description %></li>
     </ol>
+    <p><b>Due:</b> <%= @task.due_date %><p>
+    <p><b>Completed:</b> <%= @task.completed %></p>
 </div>

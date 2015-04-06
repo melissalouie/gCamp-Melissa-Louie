@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def check_token
     unless session[:token]
       session[:original_url] = request.url
-  
+
     end
   end
 

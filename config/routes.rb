@@ -7,7 +7,9 @@ Rails.application.routes.draw do
     resources :tasks
     resources :memberships
   end
-  resources :users
+  resources :users do
+    resources :comments
+  end
   resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.
