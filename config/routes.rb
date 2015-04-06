@@ -4,12 +4,13 @@ Rails.application.routes.draw do
   get 'sessions/new'
 
   resources :projects do
-    resources :tasks
+    resources :tasks do
+      resources :comments
+    end
     resources :memberships
   end
-  resources :users do
-    resources :comments
-  end
+  resources :users
+
   resources :sessions
 
   # The priority is based upon order of creation: first created -> highest priority.

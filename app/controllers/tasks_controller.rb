@@ -25,6 +25,8 @@ class TasksController < ApplicationController
     if current_user
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
+      @user = current_user
+      @comment = Comment.new
     else
       redirect_to root_path, notice: "You must be logged in to view this page."
     end
@@ -53,6 +55,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @project = Project.find(params[:project_id])
     @task.project_id = params[:project_id]
+    @task.completed = false
 
     respond_to do |format|
       if @task.save

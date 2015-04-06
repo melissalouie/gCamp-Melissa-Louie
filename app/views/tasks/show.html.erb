@@ -12,4 +12,14 @@
     </ol>
     <p><b>Due:</b> <%= @task.due_date %><p>
     <p><b>Completed:</b> <%= @task.completed %></p>
+    <div class="col-md-9">
+      <%= form_for [@project, @task, @comment] do |f| %>
+        <div class="form-group row">
+          <%= f.text_area :body, class: 'form-control' %>
+        </div>
+        <div class="form-group row">
+          <%= f.submit 'Add Comment', class: 'btn btn-info' %>
+        </div>
+      <% end %>
+    </div>
 </div>
