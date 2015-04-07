@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /users
-  # GET /users.json
+
   def index
     if current_user
       @users = User.all
@@ -11,12 +10,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     if current_user
       @user = User.new
@@ -25,18 +21,15 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'You are now signed up.' }
+        session[:user_id] = @user.id
+        format.html { redirect_to new_project_path, notice: 'You are now signed up.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -45,8 +38,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
+
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -59,8 +51,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
+
   def destroy
     if current_user == nil
         @user.comments.each do |comment|
