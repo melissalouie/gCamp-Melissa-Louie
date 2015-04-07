@@ -13,16 +13,20 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="/">gCamp</a>
       </div>
-      <ul class="nav navbar-nav">
-        <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-          Projects <span class="caret"></span></a>
+      <% if current_user %>
+        <ul class="nav navbar-nav">
+          <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+            Projects <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <% current_user.memberships.each do |membership| %>
                 <li><%= link_to membership.project.name, project_path(membership.project) %></li>
               <% end %>
+                <li id="newproject"><%= link_to 'New Project', new_project_path %></li>
             </ul>
-        </li>
-      </ul>
+          </li>
+          <li><%= link_to 'Users', users_path %></li>
+        </ul>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
           <%= link_to " #{current_user.first_name} #{current_user.last_name}", user_path(current_user), class: "navbar-brand" %>
@@ -44,29 +48,33 @@
 
 <%= yield %>
 
-
-
   <footer>
     <div class="row">
-      <div class="col-md-6">
-        <%= link_to "About", about_path %>
-        |
-        <%= link_to "Terms", terms_path %>
-        |
-        <%= link_to "FAQ", faq_path %>
-        <% if current_user %>
+      <% if current_user %>
+        <div class="links">
+          <%= link_to "Home", root_path %>
           |
-          <%= link_to "Users", users_path %>
+          <%= link_to "About", about_path %>
           |
-          <%= link_to "Projects", projects_path %>
-        <% end %>
-      </div>
-      <div class="col-md-6 text-right">
-          <%= link_to image_tag("linked_in.jpg", :class=>"img-footer"), "https://www.linkedin.com/profile/edit?trk=spm_pic" %>
-          <%= link_to image_tag("github.png", :class=>"img-footer"), "https://github.com/melissalouie" %>
-          <%= link_to image_tag("Twitter.png", :class=>"img-footer"), "https://twitter.com/missylaneuz" %>
-          <%= link_to image_tag("galvanize.png", :class=>"img-footer"), "https://students.gschool.it/students/223" %>
-      </div>
+          <%= link_to "Terms", terms_path %>
+          |
+          <%= link_to "FAQ", faq_path %>
+        </div>
+      <% else %>
+        <div class="col-md-6">
+          <%= link_to "About", about_path %>
+          |
+          <%= link_to "Terms", terms_path %>
+          |
+          <%= link_to "FAQ", faq_path %>
+        </div>
+        <div class="col-md-6 text-right">
+            <%= link_to image_tag("linked_in.jpg", :class=>"img-footer"), "https://www.linkedin.com/profile/edit?trk=spm_pic" %>
+            <%= link_to image_tag("github.png", :class=>"img-footer"), "https://github.com/melissalouie" %>
+            <%= link_to image_tag("Twitter.png", :class=>"img-footer"), "https://twitter.com/missylaneuz" %>
+            <%= link_to image_tag("galvanize.png", :class=>"img-footer"), "https://students.gschool.it/students/223" %>
+        </div>
+      <% end %>
     </div>
   </footer>
 </div> <!-- /container -->
