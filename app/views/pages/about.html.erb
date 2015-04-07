@@ -12,4 +12,32 @@
       <p>Human collaboration and communication is what drives us, and it infuses every feature of gCamp.</p>
     </div>
   </div>
+  <p>gCamp is extrememly active. Check out our killer stats below!</p>
+  <p>
+    <% if Project.count == 1 %>
+      1 Project,
+    <% else %>
+      <%= Project.count %> Projects,
+    <% end %>
+    <% if Task.count == 1 %>
+      1 Task,
+    <% else %>
+      <%= Task.count %> Tasks,
+    <% end %>
+    <% if Membership.count == 1 %>
+      1 Project Member,
+    <% else %>
+      <%= Membership.count %> Project Members,
+    <% end %>
+    <% if User.count == 1 %>
+      1 User,
+    <% else %>
+      <%= User.count %> Users,
+    <% end %>
+    <% if Comment.count == 1 %>
+      1 Comment,
+    <% else %>
+      <%= Comment.count %> Comments
+    <% end %>
+  </p>
 </div>
