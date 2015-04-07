@@ -32,8 +32,10 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    if current_user
+    @project = Project.find(params[:id])
+    if is_member?
       @project = Project.find(params[:id])
+
     else
       redirect_to root_path, notice: "You must be logged in to view this page."
     end
@@ -49,7 +51,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    if current_user
+    if is_member?
       @project = Project.find(params[:id])
     else
       redirect_to root_path, notice: "You must be logged in to view this page."
@@ -63,6 +65,11 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def is_member?
+    @project = Project.find(params[:id])
+    current_user.memberships.pluck(:project_id).include?(@project.id)
+  end
 
   def set_project
     @project = Project.find(params[:id])
