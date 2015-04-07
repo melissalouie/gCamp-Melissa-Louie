@@ -12,7 +12,19 @@
     </ol>
     <p><b>Due:</b> <%= @task.due_date %><p>
     <p><b>Completed:</b> <%= @task.completed %></p>
-    <div class="col-md-9">
+    <h2>Comments</h2>
+    <% @task.comments.each do |comment| %>
+    <div class="row">
+    <div class="col-md-3">
+      <h3><%= link_to "#{comment.user.first_name} #{comment.user.last_name}", user_path(comment.user) %></h3>
+      <p class="text-muted"><%= time_ago_in_words(comment.created_at) %> ago</p>
+    </div>
+    <div class="col-md-9 comment">
+      <p><%= comment.body %></p>
+    </div>
+  </div>
+    <% end %>
+    <div class="col-md-9 col-md-offset-3 ">
       <%= form_for [@project, @task, @comment] do |f| %>
         <div class="form-group row">
           <%= f.text_area :body, class: 'form-control' %>

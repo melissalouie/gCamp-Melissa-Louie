@@ -26,7 +26,7 @@
     <tbody>
       <% @tasks.each do |task| %>
         <tr>
-          <td class="col-md-6"><%= link_to task.description, project_task_path(@project, task) %></td>
+          <td class="col-md-6"><%= link_to task.description, project_task_path(@project, task) %><span class="badge"><%= task.comments.count %></span></td>
           <td class="col-md-2"><%= task.due_date %></td>
           <td class="text-right"><%= link_to 'View', project_task_path(@project, task), class: 'btn btn-success' %>
                                  <%= link_to 'Edit', edit_project_task_path(@project, task), class: 'btn btn-info' %>
