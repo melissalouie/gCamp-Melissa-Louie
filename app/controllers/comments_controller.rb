@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to project_task_path(@project, @task)
     else
-      return
+      redirect_to project_task_path(@project, @task)
     end
 
   end

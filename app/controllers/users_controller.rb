@@ -63,12 +63,18 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     if current_user == nil
+        @user.comments.each do |comment|
+          comment.update(user_id: nil)
+        end
         @user.destroy
         redirect_to users_path
         flash[:notice] = "User was successfully deleted."
     elsif @user == User.find_by(id: current_user.id)
       redirect_to users_path, alert: "Cannot delete user when signed in."
     else
+      @user.comments.each do |comment|
+        comment.update(user_id: nil)
+      end
       @user.destroy
       respond_to do |format|
         format.html { redirect_to users_url, notice: 'User was successfully deleted.' }
