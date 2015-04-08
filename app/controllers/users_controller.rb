@@ -53,15 +53,14 @@ class UsersController < ApplicationController
 
 
   def destroy
-    if current_user == nil
-        @user.comments.each do |comment|
-          comment.update(user_id: nil)
-        end
-        @user.destroy
-        redirect_to users_path
-        flash[:notice] = "User was successfully deleted."
-    elsif @user == User.find_by(id: current_user.id)
-      redirect_to users_path, alert: "Cannot delete user when signed in."
+    if current_user.id == @user.id
+      @user.comments.each do |comment|
+        comment.update(user_id: nil)
+      end
+      session[:user_id] = nil
+      @user.destroy
+      redirect_to root_path
+      flash[:notice] = "User was successfully deleted."
     else
       @user.comments.each do |comment|
         comment.update(user_id: nil)
