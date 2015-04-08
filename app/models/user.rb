@@ -13,4 +13,11 @@ class User < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def owns_project?(project_id)
+    @project = Project.find_by(id: project_id)
+    @memberships = @project.memberships
+    @memberships.any?{ |membership| membership.user_id == self.id && membership.role == false }
+  end
+
 end

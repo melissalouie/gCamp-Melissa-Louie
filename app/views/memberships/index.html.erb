@@ -7,8 +7,9 @@
     <li><%= link_to @project.name, project_path(@project) %></li>
     <li>Memberships</li>
   </ol>
-
+  <% if current_user.owns_project?(@project.id) %>
     <%= render 'form' %>
+  <% end %>
 
   <% @project.memberships.each do |member| %>
   <div class="form-inline">

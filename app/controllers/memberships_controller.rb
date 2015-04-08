@@ -52,6 +52,12 @@ class MembershipsController < ApplicationController
 
   private
 
+  def owns_project?
+    @project = Project.find(params[:project_id])
+    @memberships = @project.memberships
+    @memberships.any?{ |membership| membership.user_id == current_user.id && membership.role == false }
+  end
+
   def is_member?
     @project = Project.find(params[:project_id])
     current_user.memberships.pluck(:project_id).include?(@project.id)
