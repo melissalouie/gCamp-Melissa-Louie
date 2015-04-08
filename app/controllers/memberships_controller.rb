@@ -37,9 +37,12 @@ class MembershipsController < ApplicationController
     if owns_project?
       @project = Project.find(params[:project_id])
       @membership = Membership.find(params[:id])
-      if @membership.update(membership_params)
+      if @project.memberships.pluck(:role).select{ |role| role == false }.count > 1
+        @membership.update(membership_params)
         redirect_to project_memberships_path(@project)
         flash[:notice] = "Membership successfully updated."
+      else
+        redirect_to project_memberships_path(@project), alert: "Projects must have at least one owner."
       end
     else
       redirect_to project_memberships_path(@project), alert: 'You do not have access to update.'
@@ -50,12 +53,18 @@ class MembershipsController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    @membership.destroy
-    redirect_to project_memberships_path(@project)
-    flash[:notice] = "Membership successfully deleted."
+    if current_user.id == @membership.user_id
+      @membership.destroy
+      redirect_to projects_path
+      flash[:notice] = "#{current_user.full_name} successfully removed"
+    else
+      flash[:alert] = "You do not have access to delete this membership."
+    end
   end
 
   private
+
+
 
   def owns_project?
     @project = Project.find(params[:project_id])

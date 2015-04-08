@@ -15,9 +15,16 @@ class User < ActiveRecord::Base
   end
 
   def is_owner?(project_id)
-    @project = Project.find_by(id: project_id)
-    @memberships = @project.memberships
-    @memberships.any?{ |membership| membership.user_id == self.id && membership.role == false }
+    project = Project.find_by(id: project_id)
+    memberships = project.memberships
+    memberships.any?{ |membership| membership.user_id == self.id && membership.role == false }
+  end
+
+  def last_owner?(project_id)
+    project = Project.find_by(id: project_id)
+    memberships = project.memberships
+    memberships.any?{ |membership| membership.user_id == self.id && membership.role == false }
+    memberships.pluck(:role).select{ |role| role == false }.count == 1
   end
 
 end

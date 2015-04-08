@@ -14,8 +14,11 @@
     <div class="form-inline">
       <%= link_to member.user.full_name, user_path(member.user) %>
       <%= render 'updateform', member: member %>
-      <% if current_user.id == member.user_id %>
+      <% if current_user.last_owner?(@project.id) && member.role == false %>
+        You are the last owner
+      <% elsif current_user.id == member.user_id %>
         <%= link_to '', project_membership_path(@project, member), method: :delete, class: 'glyphicon glyphicon-remove' %>
+      <% else %>
       <% end %>
     </div>
   <% end %>
