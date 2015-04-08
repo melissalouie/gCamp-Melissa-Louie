@@ -22,6 +22,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if current_user.id == @user.id
+      @user = User.find(params[:id])
+    else
+      render file: 'public/404', :status => 404
+    end
   end
 
   def create
@@ -41,7 +46,7 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(user_params)
+     if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else

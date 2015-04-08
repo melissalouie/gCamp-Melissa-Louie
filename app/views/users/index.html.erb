@@ -3,7 +3,7 @@
     <%= link_to 'New User', new_user_path, class: 'btn btn-info pull-right' %>
   <h1>Users</h1>
   </div>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th class="col-md-2"><h3>Name</h3></th>
@@ -16,12 +16,13 @@
         <% @users.each do |user| %>
           <tr>
             <td class="col-md-2"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
-            <td colspan="3"><%= mail_to user.email %></td>
             <% if current_user.id == user.id %>
+              <td colspan="3"><%= mail_to user.email %></td>
               <td class="text-right"><%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
                 <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
               </td>
             <% else %>
+              <td></td>
               <td></td>
             <% end %>
           </tr>
