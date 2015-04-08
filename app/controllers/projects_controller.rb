@@ -32,12 +32,10 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
-    if is_member?
+    if owns_project?
       @project = Project.find(params[:id])
-
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to project_path(@project), alert: "You do not have access to edit this project."
     end
   end
 
@@ -67,6 +65,11 @@ class ProjectsController < ApplicationController
   end
 
   private
+  def owns_project?
+    @project = Project.find(params[:id])
+    @memberships = @project.memberships
+    @memberships.any?{ |membership| membership.user_id == current_user.id && membership.role == false }
+  end
 
   def is_member?
     @project = Project.find(params[:id])
