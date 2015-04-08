@@ -1,7 +1,7 @@
 class MembershipsController < ApplicationController
 
   def index
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @memberships = @project.memberships
       @membership = Membership.new
@@ -12,7 +12,7 @@ class MembershipsController < ApplicationController
   end
 
   def new
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @membership = Membership.new
     else
@@ -34,7 +34,7 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    if owns_project?
+    if owns_project? || admin?
       @project = Project.find(params[:project_id])
       @membership = Membership.find(params[:id])
       if @project.memberships.pluck(:role).select{ |role| role == false }.count > 1
@@ -53,7 +53,7 @@ class MembershipsController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    if current_user.id == @membership.user_id
+    if current_user.id == @membership.user_id || admin?
       @membership.destroy
       redirect_to projects_path
       flash[:notice] = "#{current_user.full_name} successfully removed"
@@ -64,7 +64,9 @@ class MembershipsController < ApplicationController
 
   private
 
-
+  def admin?
+    current_user.admin == true
+  end
 
   def owns_project?
     @project = Project.find(params[:project_id])

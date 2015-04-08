@@ -31,18 +31,20 @@
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
   </div>
-  <div class="form-group row">
-      <div class="control-label col-md-2">
-        <label>Admin</label>
-      </div>
-      <div class="form-controls col-md-4" id="checkbox">
-        <% if @user.admin == true %>
-          <%= f.check_box :admin, { :checked => 'checked' } %>
-        <% else %>
-          <%= f.check_box :admin, { :checked => 'true' } %>
-        <% end %>
-      </div>
-  </div>
+  <% if current_user.admin == true %>
+    <div class="form-group row">
+        <div class="control-label col-md-2">
+          <label>Admin</label>
+        </div>
+        <div class="form-controls col-md-4" id="checkbox">
+          <% if @user.admin == true %>
+            <%= f.check_box :admin, { :checked => 'checked' } %>
+          <% else %>
+            <%= f.check_box :admin, { :checked => 'true' } %>
+          <% end %>
+        </div>
+    </div>
+  <% end %>
   <div class="form-group row">
     <div class="col-md-offset-2 col-md-4">
       <%= f.submit class: "btn btn-info" %>

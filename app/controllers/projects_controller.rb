@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    if owns_project?
+    if owns_project? || admin?
       @project = Project.find(params[:id])
     else
       redirect_to project_path(@project), alert: "You do not have access to edit this project."
@@ -50,7 +50,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:id])
     else
       redirect_to root_path, notice: "You must be logged in to view this page."
@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    if is_member?
+    if is_member? || admin?
       @project.destroy
       flash[:notice] = "Project successfully deleted."
       redirect_to projects_path
@@ -66,6 +66,12 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def admin?
+    current_user.admin == true
+  end
+
+
   def owns_project?
     @project = Project.find(params[:id])
     @memberships = @project.memberships

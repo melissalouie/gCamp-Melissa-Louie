@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
       @user = current_user
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task = Task.new
     else
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
     else
@@ -72,7 +72,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task.project_id = params[:project_id]
       if @task.update(task_params)
@@ -89,10 +89,10 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    if is_member?
+    if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task.destroy
-      redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.' 
+      redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.'
     else
       flash[:alert] = "You do not have access to that project."
       redirect_to projects_path
@@ -100,6 +100,10 @@ class TasksController < ApplicationController
   end
 
   private
+
+    def admin?
+      current_user.admin == true
+    end
 
     def is_member?
       @project = Project.find(params[:project_id])

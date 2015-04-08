@@ -7,7 +7,7 @@
     <li><%= link_to @project.name, project_path(@project) %></li>
     <li>Memberships</li>
   </ol>
-  <% if current_user.is_owner?(@project.id) %>
+  <% if current_user.is_owner?(@project.id) || current_user.is_admin? %>
     <%= render 'form' %>
   <% end %>
   <% @project.memberships.each do |member| %>
