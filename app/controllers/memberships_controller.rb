@@ -27,19 +27,24 @@ class MembershipsController < ApplicationController
     @membership.project_id = params[:project_id]
     if @membership.save
       redirect_to project_memberships_path(@project)
-      flash[:notice] = "#{@membership.user.first_name} #{@membership.user.last_name} was successfully added."
+      flash[:notice] = "#{@membership.user.full_name} was successfully added."
     else
       render :index
     end
   end
 
   def update
-    @project = Project.find(params[:project_id])
-    @membership = Membership.find(params[:id])
-    if @membership.update(membership_params)
-      redirect_to project_memberships_path(@project)
-      flash[:notice] = "Membership successfully updated."
+    if owns_project?
+      @project = Project.find(params[:project_id])
+      @membership = Membership.find(params[:id])
+      if @membership.update(membership_params)
+        redirect_to project_memberships_path(@project)
+        flash[:notice] = "Membership successfully updated."
+      end
+    else
+      redirect_to project_memberships_path(@project), alert: 'You do not have access to update.'
     end
+
   end
 
   def destroy
