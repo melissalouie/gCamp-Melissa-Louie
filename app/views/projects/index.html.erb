@@ -12,14 +12,25 @@
         </tr>
       </thead>
       <tbody>
-        <% if @memberships.present? %>
-          <% @memberships.each do |membership| %>
+        <% if current_user.is_admin? %>
+          <% @projects.each do |project| %>
             <tr>
-              <td><%= link_to membership.project.name, project_path(membership.project) %></td>
-              <td><%= link_to membership.project.tasks.count, project_tasks_path(membership.project) %>
-              <td class="text-right"><%= link_to 'Edit', edit_project_path(membership.project), class: 'btn btn-info' %>
-                <%= link_to 'Delete', project_path(membership.project), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?' } %></td>
+              <td><%= link_to project.name, project_path(project) %></td>
+              <td><%= link_to project.tasks.count, project_tasks_path(project) %>
+              <td class="text-right"><%= link_to 'Edit', edit_project_path(project), class: 'btn btn-info' %>
+                <%= link_to 'Delete', project_path(project), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?' } %></td>
             </tr>
+          <% end %>
+        <% else %>
+          <% if @memberships.present? %>
+            <% @memberships.each do |membership| %>
+              <tr>
+                <td><%= link_to membership.project.name, project_path(membership.project) %></td>
+                <td><%= link_to membership.project.tasks.count, project_tasks_path(membership.project) %>
+                <td class="text-right"><%= link_to 'Edit', edit_project_path(membership.project), class: 'btn btn-info' %>
+                  <%= link_to 'Delete', project_path(membership.project), method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
           <% end %>
         <% end %>
       </tbody>

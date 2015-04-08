@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
     memberships.pluck(:role).select{ |role| role == false }.count == 1
   end
 
+  def is_admin?
+    self.admin == true
+  end
+
 end

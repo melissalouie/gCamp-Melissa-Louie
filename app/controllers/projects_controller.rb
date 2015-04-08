@@ -4,6 +4,7 @@ class ProjectsController < ApplicationController
   def index
     if current_user
       @memberships = current_user.memberships
+      @projects = Project.all
     else
       redirect_to root_path, notice: "You must be logged in to view this page."
     end
