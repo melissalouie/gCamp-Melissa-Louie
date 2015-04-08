@@ -1,14 +1,24 @@
 class MembershipsController < ApplicationController
 
   def index
-    @project = Project.find(params[:project_id])
-    @memberships = @project.memberships
-    @membership = Membership.new
+    if is_member?
+      @project = Project.find(params[:project_id])
+      @memberships = @project.memberships
+      @membership = Membership.new
+    else
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
+    end
   end
 
   def new
-    @project = Project.find(params[:project_id])
-    @membership = Membership.new
+    if is_member?
+      @project = Project.find(params[:project_id])
+      @membership = Membership.new
+    else
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
+    end
   end
 
   def create
@@ -41,6 +51,12 @@ class MembershipsController < ApplicationController
   end
 
   private
+
+  def is_member?
+    @project = Project.find(params[:project_id])
+    current_user.memberships.pluck(:project_id).include?(@project.id)
+  end
+
   def membership_params
     params.require(:membership).permit(:user_id, :project_id, :role)
   end

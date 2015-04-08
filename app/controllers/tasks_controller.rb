@@ -22,80 +22,90 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    if current_user
+    if is_member?
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
       @user = current_user
       @comment = Comment.new
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
     end
   end
 
   # GET /tasks/new
   def new
-    @project = Project.find(params[:project_id])
-    @task = Task.new
+    if is_member?
+      @project = Project.find(params[:project_id])
+      @task = Task.new
+    else
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
+    end
   end
 
   # GET /tasks/1/edit
   def edit
-    if current_user
+    if is_member?
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
     end
   end
 
   # POST /tasks
   # POST /tasks.json
   def create
-
     @task = Task.new(task_params)
     @project = Project.find(params[:project_id])
     @task.project_id = params[:project_id]
     @task.completed = false
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to project_tasks_path(@project), notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+    if @task.save
+        redirect_to project_tasks_path(@project), notice: 'Task was successfully created.'
       else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+        render :new
     end
   end
 
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    @project = Project.find(params[:project_id])
-    @task.project_id = params[:project_id]
-    respond_to do |format|
+    if is_member?
+      @project = Project.find(params[:project_id])
+      @task.project_id = params[:project_id]
       if @task.update(task_params)
-        format.html { redirect_to project_tasks_path(@project), notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        redirect_to project_tasks_path(@project), notice: 'Task was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        render :edit
       end
+    else
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
     end
   end
 
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @project = Project.find(params[:project_id])
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+    if is_member?
+      @project = Project.find(params[:project_id])
+      @task.destroy
+      redirect_to project_tasks_path(@project), notice: 'Task was successfully destroyed.' 
+    else
+      flash[:alert] = "You do not have access to that project."
+      redirect_to projects_path
     end
   end
 
   private
+
+    def is_member?
+      @project = Project.find(params[:project_id])
+      current_user.memberships.pluck(:project_id).include?(@project.id)
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])

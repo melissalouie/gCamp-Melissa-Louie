@@ -59,9 +59,11 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project.destroy
-    flash[:notice] = "Project successfully deleted."
-    redirect_to projects_path
+    if is_member?
+      @project.destroy
+      flash[:notice] = "Project successfully deleted."
+      redirect_to projects_path
+    end
   end
 
   private
