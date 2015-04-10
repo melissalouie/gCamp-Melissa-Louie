@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate
+  before_action :authenticate, except: [:create]
 
 
   def index
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.id == @user.id
+    if current_user.id == @user.id || admin?
       @user = User.find(params[:id])
     else
       render file: 'public/404', :status => 404
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
 
 
   def destroy
-    if current_user.id == @user.id
+    if current_user.id == @user.id || admin?
       @user.comments.each do |comment|
         comment.update(user_id: nil)
       end
@@ -80,6 +80,11 @@ class UsersController < ApplicationController
   end
 
   private
+    def admin?
+      if current_user
+        current_user.admin == true
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

@@ -2,8 +2,15 @@ require 'rails_helper'
 
 describe 'User can CRUD Users' do
   before :each do
-    visit '/'
-    click_on "Users"
+    visit '/signin'
+    User.create(first_name: 'Buddy', last_name: 'Louie', email: 'buddy@mail.com', password: 'password', admin: true)
+    fill_in 'email', with: 'buddy@mail.com'
+    fill_in 'password', with: 'password'
+    within('form') do
+      click_on 'Sign In'
+    end
+    click_on 'Users'
+
     click_on "New User"
     fill_in 'user[first_name]', with: 'Melissa'
     fill_in 'user[last_name]', with: 'Louie'
@@ -18,6 +25,10 @@ describe 'User can CRUD Users' do
   end
 
   scenario 'User can edit a user' do
+    click_on 'Users'
+    within('table') do
+      click_on 'Melissa Louie'
+    end
     click_on 'Edit'
     fill_in 'user[first_name]', with: 'Missy'
     click_on 'Update User'
@@ -25,7 +36,13 @@ describe 'User can CRUD Users' do
   end
 
   scenario 'User can delete a user' do
-    click_on 'Delete'
+    click_on 'Users'
+    within('table') do
+      click_on 'Melissa Louie'
+    end
+    within('.page-header') do
+      click_on 'Delete'
+    end
     expect(page).to have_no_content('Melissa Louie')
 
   end

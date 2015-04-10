@@ -1,6 +1,6 @@
 <div class="container">
   <div class="page-header">
-    <% if current_user.id == @user.id %>
+    <% if current_user.id == @user.id || current_user.is_admin? %>
       <%= link_to 'Delete', user_path(@user), method: :delete, confirm: 'Are you sure?', class: "btn btn-danger pull-right" %>
       <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-info pull-right", id: "edit-button" %>
     <% end %>
