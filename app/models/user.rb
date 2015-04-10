@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :tasks, through: :comments
   has_many :memberships, dependent: :destroy
-  has_many :projects, through: :members
+  has_many :projects, through: :memberships
 
   def full_name
     "#{first_name} #{last_name}"
@@ -31,4 +31,9 @@ class User < ActiveRecord::Base
     self.admin == true
   end
 
+  def also_member?(user)
+    self.projects.any? do |project|
+      project.users.pluck(:user_id).include?(user.id)
+    end
+  end
 end

@@ -16,7 +16,7 @@
       <%= render 'updateform', member: member %>
       <% if current_user.last_owner?(@project.id) && member.role == false %>
         You are the last owner
-      <% elsif current_user.id == member.user_id %>
+      <% elsif current_user.id == member.user_id || current_user.is_admin? %>
         <%= link_to '', project_membership_path(@project, member), method: :delete, class: 'glyphicon glyphicon-remove' %>
       <% else %>
       <% end %>
