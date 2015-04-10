@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   before_action :authenticate
+  before_action :logged_in?
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
 
   def incomplete
     if current_user
@@ -12,18 +14,18 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    if current_user
+      if is_member? || admin?
       @project = Project.find(params[:project_id])
       @tasks = @project.tasks
     else
-      redirect_to signin_path, notice: "You must be logged in to view this page."
+      redirect_to projects_path, notice: "You do not have access to this page."
     end
   end
 
   # GET /tasks/1
   # GET /tasks/1.json
   def show
-    if is_member? || admin?
+      if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task = Task.find(params[:id])
       @user = current_user
@@ -36,7 +38,7 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    if is_member? || admin?
+      if is_member? || admin?
       @project = Project.find(params[:project_id])
       @task = Task.new
     else
@@ -101,6 +103,12 @@ class TasksController < ApplicationController
   end
 
   private
+
+    def logged_in?
+      if not current_user
+        redirect_to signin_path notice: "You must be logged in to view this page."
+      end
+    end
 
     def admin?
       current_user.admin == true

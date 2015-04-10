@@ -7,8 +7,8 @@
       <thead>
         <tr>
           <th class="col-md-2"><h3>Name</h3></th>
-          <th colspan="3"><h3>Email</h3></th>
-          <th colspan="3"></th>
+          <th class="col-md-2"><h3>Email</h3></th>
+          <th class="col-md-8"></th>
         </tr>
       </thead>
 
@@ -17,13 +17,12 @@
           <tr>
             <td class="col-md-2"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
             <% if current_user.id == user.id || current_user.is_admin? %>
-              <td colspan="3"><%= mail_to user.email %></td>
-              <td class="text-right"><%= link_to 'Edit', edit_user_path(user), class: "btn btn-info" %>
-                <%= link_to 'Delete', user_path(user), method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
-              </td>
+              <td class="col-md-2"><%= mail_to user.email %></td>
+              <td class="col-md-8 text-right"><%= link_to 'Edit', edit_user_path(user) %></td>
             <% else %>
-              <td></td>
-              <td></td>
+              <td class="col-md-2"></td>
+              <td class="col-md-2"></td>
+              <td class="col-md-8"></td>
             <% end %>
           </tr>
         <% end %>
