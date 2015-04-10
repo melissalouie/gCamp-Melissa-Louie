@@ -1,11 +1,12 @@
 class TasksController < ApplicationController
+  before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def incomplete
     if current_user
       @tasks = Task.all
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to signin_path, notice: "You must be logged in to view this page."
     end
   end
   # GET /tasks
@@ -15,7 +16,7 @@ class TasksController < ApplicationController
       @project = Project.find(params[:project_id])
       @tasks = @project.tasks
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to signin_path, notice: "You must be logged in to view this page."
     end
   end
 

@@ -6,7 +6,12 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user and @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to projects_path
+      if session[:return_to]
+       redirect_to session[:return_to], notice: 'You are now logged in.'
+       session[:return_to] = nil
+     else
+       redirect_to projects_path, notice: 'You are now logged in.'
+     end
     else
       flash.now[:alert] = "Username/password combination is invalid."
       render :new

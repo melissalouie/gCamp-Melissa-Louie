@@ -1,12 +1,14 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+
 
   def index
     if current_user
       @memberships = current_user.memberships
       @projects = Project.all
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to signin_path, notice: "You must be logged in to view this page."
     end
   end
 
@@ -14,7 +16,7 @@ class ProjectsController < ApplicationController
     if current_user
       @project = Project.new
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to signin_path, notice: "You must be logged in to view this page."
     end
   end
 
@@ -53,7 +55,7 @@ class ProjectsController < ApplicationController
     if is_member? || admin?
       @project = Project.find(params[:id])
     else
-      redirect_to root_path, notice: "You must be logged in to view this page."
+      redirect_to signin_path, notice: "You must be logged in to view this page."
     end
   end
 
@@ -68,7 +70,9 @@ class ProjectsController < ApplicationController
   private
 
   def admin?
-    current_user.admin == true
+    if current_user
+      current_user.admin == true
+    end
   end
 
 
@@ -79,8 +83,10 @@ class ProjectsController < ApplicationController
   end
 
   def is_member?
-    @project = Project.find(params[:id])
-    current_user.memberships.pluck(:project_id).include?(@project.id)
+    if current_user
+      @project = Project.find(params[:id])
+      current_user.memberships.pluck(:project_id).include?(@project.id)
+    end
   end
 
   def set_project
