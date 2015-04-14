@@ -7,8 +7,8 @@ RSpec.describe ProjectsController, type: :controller do
       it "updates the requested project" do
         user = User.create(first_name: 'Melissa', last_name: 'Louie', email: 'melissa@mail.com', password: 'password', admin: 'true')
         session[:user_id] = user.id
-        project = Project.create!( name: 'Test Project')
-        put :update, id: project.id, :project => { id: project.id, name: 'Updated Project' }
+        project = Project.create(name: 'Test Project')
+        put :update, id: project.id, :project => {id: project.id, name: 'Updated Project'}
         project.reload
         expect(project.name).to eq('Updated Project')
       end
