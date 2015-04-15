@@ -12,6 +12,15 @@ RSpec.describe ProjectsController, type: :controller do
         project.reload
         expect(project.name).to eq('Updated Project')
       end
+
+      it "deletes the requested project" do
+        user = User.create(first_name: 'Melissa', last_name: 'Louie', email: 'melissa@mail.com', password: 'password', admin: 'true')
+        session[:user_id] = user.id
+        project = Project.create(name: 'Project')
+        projects = Project.count
+        delete :destroy, id: project.id
+        expect(Project.count).to eq(projects - 1)
+      end
     end
   end
 
