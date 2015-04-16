@@ -63,7 +63,6 @@ class UsersController < ApplicationController
       @user.comments.each do |comment|
         comment.update(user_id: nil)
       end
-      session[:user_id] = nil
       @user.destroy
       redirect_to root_path
       flash[:notice] = "User was successfully deleted."
