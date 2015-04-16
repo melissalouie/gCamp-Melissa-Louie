@@ -16,7 +16,7 @@ RSpec.describe MembershipsController, type: :controller do
       post :create, project_id: @project.id, :membership => {id: @membership.id, user_id: @user.id, role: true}
       expect(@membership.role).to eq(true)
     end
-    
+
     # it "updates the requested membership" do
     #   put :update, project_id: @project.id, id: @membership.id, :membership => {id: @membership.id, user_id: @user_2.id }
     #   @membership.reload

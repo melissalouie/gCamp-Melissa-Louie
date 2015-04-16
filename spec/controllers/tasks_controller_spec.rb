@@ -5,7 +5,7 @@ RSpec.describe TasksController, type: :controller do
   context "with valid params" do
 
     before(:each) do
-      user = User.create(first_name: 'Melissa', last_name: 'Louie', email: 'melissa@mail.com', password: 'password', admin: 'true')
+      user = User.create(first_name: 'Melissa', last_name: 'Louie', email: 'melissa@mail.com', password: 'password', admin: true)
       session[:user_id] = user.id
       @project = Project.create(name: 'Test Project')
       @task = Task.create(description: 'Test Task', project_id: @project.id, due_date: '2015/04/20')
