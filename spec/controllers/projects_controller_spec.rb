@@ -10,6 +10,12 @@ RSpec.describe ProjectsController, type: :controller do
         session[:user_id] = user.id
       end
 
+      it "creates the requested project" do
+        project = Project.create(name: 'Test Project')
+        post :create, id: project.id, :project => {id: project.id, name: 'Test Project'}
+        expect(project.name).to eq('Test Project')
+      end
+
       it "updates the requested project" do
         project = Project.create(name: 'Test Project')
         put :update, id: project.id, :project => {id: project.id, name: 'Updated Project'}
