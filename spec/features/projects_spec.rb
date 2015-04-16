@@ -10,7 +10,9 @@ describe 'Users can CRUD projects' do
       click_on 'Sign In'
     end
     visit '/projects'
-    click_on 'Create Project'
+    within('.page-header') do
+      click_on 'New Project'
+    end
     fill_in 'project_name', with: 'First Project'
     click_on 'Create Project'
   end
