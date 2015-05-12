@@ -1,7 +1,7 @@
 # Melissa's gCamp
 Ruby Version '2.2.0'
 
-[View on Heroku](http://fathomless-fortress-7983.herokuapp.com)
+[View on Heroku](http://gcamplouie.herokuapp.com/)
 
 To Install:
 
