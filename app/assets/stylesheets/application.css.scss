@@ -6,6 +6,12 @@
  body {
    padding-top: 50px;
    font-family: 'Open Sans', sans-serif;
+   color: #9d9d9d;
+ }
+
+ .fa, .fa:hover {
+   color: #9d9d9d;
+   font-size: 200% !important;
  }
 
  .navbar-inverse {
@@ -33,8 +39,28 @@
    color: black !important;
  }
 
+.content h1 {
+  text-align: center;
+  margin-top: 200px;
+  margin-bottom: 50px;
+}
 
+.how-to, .about, .sign-up {
+  height: 325px;
+}
 
+.about .col-md-4 {
+  margin: 200px 0;
+
+}
+
+.about h3 {
+  text-align: center;
+}
+
+.about .fa {
+  font-size: 500% !important;
+}
 .edit_membership {
   display: inline;
   padding: 10px;
