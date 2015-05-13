@@ -1,10 +1,48 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="container">
-  <div class="jumbotron">
-    <h1>Taskdom</h1>
-    <p>Your life, organized.</p>
-  </div>
-  <div class="row">
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+     <div class="item active">
+      <%= image_tag("hands.jpg", class: 'layer') %>
+       <div class="carousel-caption">
+           <h2>Taskdom.  Your life, organized.</h2>
+       </div>
+     </div>
+     <div class="item">
+       <%= image_tag("meeting.jpg", class: 'layer') %>
+       <div class="carousel-caption">
+           <h2>Task efficiently and increase productivity.</h2>
+       </div>
+     </div>
+     <div class="item">
+       <%= image_tag("meeting_2.jpg", class: 'layer') %>
+       <div class="carousel-caption">
+           <h2>Easy to use.  Critical team tool to ensure success.</h2>
+       </div>
+     </div>
+   </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <i class="fa fa-angle-left" id="arrow"></i>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <i class="fa fa-angle-right" id="arrow"></i>
+  </a>
+
+</div> <!-- Carousel -->
+
+
+
+  <!-- <div class="row">
     <div class="col-md-4">
       <p class="lead">
         <%= image_tag("tablet.jpg", class: "img-responsive") %>
@@ -49,4 +87,4 @@
       <p>"<%= quote %>" </p>
       <p class ="text-muted"><em><%= author %></em></p>
     <% end %>
-  </div>
+  </div> -->

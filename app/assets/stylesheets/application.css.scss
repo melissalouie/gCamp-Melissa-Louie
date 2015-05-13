@@ -6,12 +6,30 @@
    padding-top: 50px;
  }
 
-.jumbotron {
-  padding-left: 60px;
-  padding-right: 60px;
-  border-radius: 6px;
-  margin-top: 10px;
-}
+ .navbar-inverse {
+   background-color: white;
+   border-color: white;
+ }
+
+
+ .carousel-inner > .item > img {
+   width: 1300px;
+ }
+
+ .layer {
+   opacity: 0.6;
+   filter: alpha(opacity=40);
+ }
+
+ #arrow {
+   margin-top: 220px;
+   font-size: 50px;
+ }
+
+ a:hover {
+   color: black !important;
+ }
+
 
 
 .edit_membership {
