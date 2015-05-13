@@ -1,9 +1,11 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
 
 
  body {
    padding-top: 50px;
+   font-family: 'Open Sans', sans-serif;
  }
 
  .navbar-inverse {
@@ -14,6 +16,7 @@
 
  .carousel-inner > .item > img {
    width: 1300px;
+   height: 800px;
  }
 
  .layer {
@@ -22,7 +25,7 @@
  }
 
  #arrow {
-   margin-top: 200px;
+   margin-top: 400px;
    font-size: 50px;
  }
 
