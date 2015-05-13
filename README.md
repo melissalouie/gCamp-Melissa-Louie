@@ -11,4 +11,4 @@ rake db:create db:migrate db:seed
 rails s
 
 ```
-[![Build Status](https://travis-ci.org/melissalouie/gCamp-Melissa-Louie.svg)](https://travis-ci.org/melissalouie/gCamp-Melissa-Louie)
+[![Build Status](https://travis-ci.org/melissalouie/Taskdom-Melissa-Louie.svg)](https://travis-ci.org/melissalouie/Taskdom-Melissa-Louie)
